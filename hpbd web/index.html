@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Vân Phạm💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+body{
+  background:radial-gradient(circle at top,#0f2027,#203a43,#2c5364);
+  height:100vh;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;
+}
+.stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;}
+.star{position:absolute;width:2px;height:2px;background:white;opacity:.8;animation:twinkle 3s infinite alternate;}
+@keyframes twinkle{from{opacity:.2}to{opacity:1}}
+
+.lock-screen{text-align:center;}
+input{padding:10px 18px;border-radius:20px;border:none;outline:none;}
+button{padding:10px 26px;border-radius:30px;border:none;background:#fff;color:#ff6f91;cursor:pointer;margin-top:10px;}
+
+.container{display:none;text-align:center;max-width:600px;padding:30px;animation:fadeIn 2s ease;}
+h1{font-size:2.5rem;margin-bottom:20px;animation:float 3s infinite;}
+.typing{font-size:1.2rem;line-height:1.7;min-height:120px;}
+
+.avatar{
+  width:180px;height:180px;
+  border-radius:50%;
+  object-fit:cover;
+  box-shadow:0 15px 40px rgba(0,0,0,.4);
+  margin:20px auto;
+  animation:float 4s infinite;
+}
+
+.letter{margin-top:25px;display:none;}
+.letter-box{background:rgba(255,255,255,.15);padding:20px;border-radius:20px;backdrop-filter:blur(6px);}
+
+.surprise{margin-top:20px;display:none;}
+.surprise img{width:220px;border-radius:20px;}
+
+.music-btn{
+  position:fixed;top:20px;right:20px;
+  background:rgba(255,255,255,.2);
+  color:white;
+}
+
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="lock-screen" id="lock">
+  <h2>💌 Món quà nhỏ dành riêng cho cậu nè</h2><br>
+  <p>Nhập mật khẩu để mở ✨</p><br>
+  <input type="password" id="pass" placeholder="Ngày sinh...">
+  <br>
+  <button onclick="unlock()">Mở</button>
+</div>
+
+<div class="container" id="main">
+  <h1>🎂 Chúc mừng sinh nhật chị Mây 💖</h1>
+
+  <!-- ẢNH CRUSH -->
+  <img src="avatar.png" class="avatar">
+
+  <div class="typing" id="typing"></div>
+
+  <button onclick="openLetter()">Mở thư 💌</button>
+
+  <div class="letter" id="letter">
+    <div class="letter-box">
+      tuổi mới chị ít bơ lại nhaaa <br>
+      ✨
+    </div>
+  </div>
+
+  <button onclick="showSurprise()">Bất ngờ cuối 🎁</button>
+
+  <div class="surprise" id="surprise">
+    <img src="avatar.png">
+    <p>Tuổi 24, mọi điều tốt đẹp nhất đến với chị nheee😗🥳🎊, 💖💗</p>
+  </div>
+</div>
+
+<button class="music-btn" onclick="toggleMusic()">🎶</button>
+
+<!-- NHẠC -->
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// sao
+for(let i=0;i<120;i++){
+  const s=document.createElement('div');
+  s.className='star';
+  s.style.left=Math.random()*100+'vw';
+  s.style.top=Math.random()*100+'vh';
+  document.getElementById('stars').appendChild(s);
+}
+
+// mở khóa
+function unlock(){
+  if(document.getElementById('pass').value==='2012'){
+    lock.style.display='none';
+    main.style.display='block';
+    typeWriter();
+    fireworks();
+    music.play();
+  } else alert('Sai rồi, thử lại nha 💕');
+}
+
+// typing
+const text="Hôm nay là một ngày đặc biệt đối với chị.\nEm chúc chị tuổi mới nhan sắc thăng hạng, công việc thăng tiến,quan trọng nhất là sớm có những sổ tiết kiệm 10 số nheee🫶. ";
+let i=0;
+function typeWriter(){
+  if(i<text.length){
+    typing.innerHTML+=text[i]==='\n'?'<br>':text[i];
+    i++;setTimeout(typeWriter,55);
+  }
+}
+
+function openLetter(){letter.style.display='block'}
+function showSurprise(){surprise.style.display='block'}
+
+// pháo hoa
+function fireworks(){
+  for(let i=0;i<25;i++){
+    const f=document.createElement('div');
+    f.style.position='fixed';
+    f.style.left=Math.random()*100+'vw';
+    f.style.top=Math.random()*100+'vh';
+    f.innerHTML='🎉';
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),2000);
+  }
+}
+
+// nhạc
+function toggleMusic(){
+  music.paused?music.play():music.pause();
+}
+</script>
+
+</body>
+</html>
